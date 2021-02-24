@@ -1,0 +1,55 @@
+﻿<Window x:Class="EvidencijaEkskurzija.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EvidencijaEkskurzija.View"
+        mc:Ignorable="d"
+        Title="{Binding Model.NazivProzora}" Height="520" Width="1200"
+        DataContext="{Binding EkskurzijaView, Source={StaticResource Locator}}">
+    <Border Padding="10">
+        <StackPanel>
+            <!--Pretraga Grid-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="73"/>
+                    <ColumnDefinition Width="309"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Label Content="Pretraga:" Grid.Row="0" Grid.Column="0" Margin="0 10" FontSize="15"></Label>
+                <Button Command="{Binding PretragaKomanda}" x:Name="Pretraga" Grid.Column="2" Grid.Row="0" Content="Pretraga" Margin="10" FontSize="15"></Button>
+                <TextBox Text="{Binding Model.Pretraga, Mode=TwoWay}" VerticalAlignment="Center" FontSize="15" Grid.Row="0" Grid.Column="1" Margin="2"></TextBox>
+            </Grid>
+            <!--Pretraga Grid - Kraj-->
+            <!--Tabela Grid-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <DataGrid ItemsSource="{Binding Model.Ekskurzije}" SelectedItem="{Binding Model.SelektovanaEkskurzija}" FontSize="15" IsSynchronizedWithCurrentItem="True" Name="GridExkskurzija" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Naziv Destinacije" IsReadOnly="true" Binding="{Binding NazivDestinacije}" Width="1.5*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Cena po osobi" IsReadOnly="true" Binding="{Binding Cena}" Width="1.5*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Datum" IsReadOnly="true" Binding="{Binding Datum}" Width="1.5*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Dani Boravka" IsReadOnly="true" Binding="{Binding DaniBoravka}" Width="1.5*"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Command="{Binding PrikaziSveEkskurijeKomanda}" Content="Prikazi sve ekskurzije" Grid.Column="1" Grid.Row="0" Margin="5 0 5 350" FontSize="15"></Button>
+                <Button Command="{Binding IzmeniEkskurzijuKomanda}" Content="Izmeni" Grid.Column="1" Grid.Row="0" Margin="5 70 5 280" FontSize="15"></Button>
+                <Button Command="{Binding ObrisiEkskurzijuKomanda}" Content="Izbriši" Grid.Column="1" Grid.Row="0" Margin="5 140 5 210" FontSize="15"></Button>
+                <Button Command="{Binding EksportXMLKomanda}"  Content="Export u XML" Grid.Column="1" Grid.Row="0" Margin="5 350 5 0" FontSize="15"></Button>
+                <Button Command="{Binding DodavanjeEkskurzijeKomanda}" Content="Dodaj Novu Ekskurziju" Grid.Column="1" Grid.Row="0" Margin="5 210 5 140" FontSize="15"></Button>
+            </Grid>
+            <!--Tabela Grid - Kraj-->
+        </StackPanel>
+    </Border>
+</Window>
